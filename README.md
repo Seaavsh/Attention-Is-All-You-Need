@@ -76,6 +76,8 @@ print("Sentence:", sentence)
 print("Attention Weights (rounded):")
 print(np.round(attention_weights, decimals=3))
 ```
+![](Weights.png)
+
 Math: " attention_weights " is an $$n \times n$$ matrix where $$w_{ij}$$ shows how word $$i$$ attends to $$j$$. Sum of each row = 1 (softmax property).
 It’s the guest list with scores. Who’s the VIP (high weights) and who’s just background noise?
 ## Visualization: 
@@ -95,6 +97,8 @@ plt.colorbar(im, ax=ax, label='Attention Score')
 plt.tight_layout()
 plt.show()
 ```
+![](Heatmap.png)
+
 Math: We simulate two heads by perturbing $$Q, K, V$$ slightly (paper uses linear projections and h=8 heads). Each head’s "attention_weights" varies, showing diverse focus.
 It’s a detective duo! One head might track "is" to "all," another "you" to "need" . Like Figure 4’s "its" resolution or Figure 5’s syntax mapping.
 Paper Link: Echoes multi-head visuals (Figure 2 right, Figure 5), where heads specialize (e.g., delimiter vs. binding).
@@ -111,6 +115,7 @@ for i, v in enumerate(self_attention):
     ax2.text(i, v + 0.02, f'{v:.3f}', ha='center', va='bottom')
 plt.tight_layout()
 ```
+![](Barchart.png)
 
 ### Running the Show: Your Late Night Experiment
 
