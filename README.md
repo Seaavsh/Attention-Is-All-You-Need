@@ -68,7 +68,7 @@ x = embeddings + pe
 q = k = v = x
 ```
 Math: We create random embeddings ($$n \times d_{model}$$), add positional encodings, and set $$Q = K = V = X$$ for self-attention. In reality, $$Q, K, V$$ are linear projections (paper’s Equation 1), but our toy skips that for simplicity.
-It’s a self love fest. Each word checks itself in the mirror (diagonal attention) while gossiping with pals (off-diagonals). Try something else yourself !!!
+It’s a self love fest. Each word checks itself in the mirror (diagonal attention) while gossiping with pals (off-diagonals). Try " Fight for your dreams "  !!!
 ### Running the Show and Printing Weights
 ```
 output, attention_weights = scaled_dot_product_attention(q, k, v)
@@ -151,6 +151,8 @@ Heatmaps with text annotations mimic Figure 3-5’s clarity, showing how "attent
 Run this, snap your heatmaps, and share on LinkedIn! Tweak the code add heads, adjust $$d_{model}$$. Share your feedback with me andddddd ....
 let’s geek out!
 
-Siavash Sharifnezhad 
+Siavash Sharifnezhad
+
 Email: siavash.s7.79@gmail.com
+
 Linkedin: https://www.linkedin.com/in/sharifnezhad
