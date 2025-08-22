@@ -6,3 +6,8 @@ This project is a mini-recreation of the Transformer’s self-attention magic, s
 
 Step-by-Step Breakdown: The Code Carnival Ride
 Imports and Seed: Setting the Stage
+```
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(42)
+```
