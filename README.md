@@ -111,28 +111,6 @@ for i, v in enumerate(self_attention):
     ax2.text(i, v + 0.02, f'{v:.3f}', ha='center', va='bottom')
 plt.tight_layout()
 ```
-### Multi-Head Simulation Like Figure 5
-```
-fig4, axes4 = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
-for idx, ax in enumerate(axes4):
-    q_head = q + np.random.randn(*q.shape) * 0.1
-    k_head = k + np.random.randn(*k.shape) * 0.1
-    v_head = v + np.random.randn(*v.shape) * 0.1
-    _, head_weights = scaled_dot_product_attention(q_head, k_head, v_head)
-    im = ax.imshow(head_weights, cmap='viridis', interpolation='nearest')
-    ax.set_xticks(np.arange(n))
-    ax.set_yticks(np.arange(n))
-    ax.set_xticklabels(sentence, rotation=45, ha='right')
-    ax.set_yticklabels(sentence) if idx == 0 else ax.set_yticklabels([])
-    for i in range(n):
-        for j in range(n):
-            text = ax.text(j, i, f'{head_weights[i, j]:.3f}', ha='center', va='center', color='w' if head_weights[i, j] > 0.5 else 'black')
-    ax.set_title(f"Head {idx + 1}: Attention Patterns")
-plt.subplots_adjust(wspace=0.3, hspace=0.2, top=0.85, bottom=0.15, left=0.1, right=0.9)
-fig4.colorbar(im, ax=axes4, label='Attention Score', orientation='horizontal', pad=0.2)
-
-plt.show()
-```
 
 ### Running the Show: Your Late Night Experiment
 
