@@ -111,18 +111,6 @@ for i, v in enumerate(self_attention):
     ax2.text(i, v + 0.02, f'{v:.3f}', ha='center', va='bottom')
 plt.tight_layout()
 ```
-### Line Plot of Positional Encoding
-```
-fig3, ax3 = plt.subplots(figsize=(10, 5))
-pe_first_dim = pe[:, 0]
-ax3.plot(np.arange(n), pe_first_dim, marker='o', color='#FF6B6B', linewidth=2, label='Sine Wave (Dim 0)')
-ax3.set_title("Positional Encoding Trend (First Dimension)")
-ax3.set_xlabel("Position")
-ax3.set_ylabel("Encoding Value")
-ax3.grid(True, linestyle='--', alpha=0.7)
-ax3.legend()
-plt.tight_layout()
-```
 ### Multi-Head Simulation Like Figure 5
 ```
 fig4, axes4 = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
@@ -140,8 +128,10 @@ for idx, ax in enumerate(axes4):
         for j in range(n):
             text = ax.text(j, i, f'{head_weights[i, j]:.3f}', ha='center', va='center', color='w' if head_weights[i, j] > 0.5 else 'black')
     ax.set_title(f"Head {idx + 1}: Attention Patterns")
+plt.subplots_adjust(wspace=0.3, hspace=0.2, top=0.85, bottom=0.15, left=0.1, right=0.9)
 fig4.colorbar(im, ax=axes4, label='Attention Score', orientation='horizontal', pad=0.2)
-plt.tight_layout()
+
+plt.show()
 ```
 
 ### Running the Show: Your Late Night Experiment
