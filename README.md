@@ -131,8 +131,8 @@ Our toy skips the paper’s 512 $$d_{model}$$ and 6-layer stacks, but the core $
 Heatmaps with text annotations mimic Figure 3-5’s clarity, showing how "attention" links to "need" (context resolution).
 
 ## Your Turn: Join the Carnival!
-Run this, snap your heatmaps, and share on LinkedIn! Tweak the code add heads, adjust $$d_{model}$$. Share your feedback with me andddddd ....
-let’s geek out!
+Run this, snap your heatmaps, and share them on LinkedIn! Tweak the code, add heads, adjust settings, and share your feedback with me. Then, let’s geek out together! 🚀
+
 
 Siavash Sharifnezhad
 
