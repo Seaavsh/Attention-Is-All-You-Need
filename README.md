@@ -48,7 +48,7 @@ def scaled_dot_product_attention(q, k, v):
 ```
 
 Math Magic: This is the heart! For queries $$Q$$, keys $$K$$, and values $$V$$ (all $$n \times d_k$$ matrices), the attention score is:
-$${Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$$
+$${Attention}(Q, K, V) = {softmax}(\frac{QK^T}{\sqrt{d_k}})V$$
 
 $$QK^T$$ computes dot products (compatibility scores).
 Divide by $$\sqrt{d_k}$$ (here, $$\sqrt{8} \approx 2.83$$) stabilizes gradients (paper’s key insight).
