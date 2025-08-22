@@ -3,7 +3,7 @@
 Read the full paper here: https://arxiv.org/abs/1706.03762
 
 ## The Big Picture: What’s This Toy All About?
-This project is a mini recreation of the Transformer’s self-attention magic, scaled down for fun and learning. The paper revolutionized AI by replacing slow recurrent networks with parallel attention mechanisms, and we’re mimicking that with a tiny sentence ("attention is all you need") and basic math. Our goal? To see how words "attend" to each other, just like the paper’s heatmaps, and visualize it with flair. Perfect for a late night coding party!
+This project is a mini recreation of the Transformer’s self-attention magic, scaled down for fun and learning. The paper revolutionized AI by replacing slow recurrent networks with parallel attention mechanisms, and we’re mimicking that with a tiny sentence ("attention is all you need") and basic math. Our goal? To see how words "attend" to each other, just like the paper’s heatmaps, and visualize. Perfect for a late night coding party!
 
 ## Step-by-Step Breakdown: The Code Carnival Ride
 ### Imports and Seed: Setting the Stage
@@ -76,9 +76,10 @@ print("Sentence:", sentence)
 print("Attention Weights (rounded):")
 print(np.round(attention_weights, decimals=3))
 ```
-Math: $${attention_weights}$$ is an $$n \times n$$ matrix where $$w_{ij}$$ shows how word $$i$$ attends to $$j$$. Sum of each row = 1 (softmax property).
+Math: " attention_weights " is an $$n \times n$$ matrix where $$w_{ij}$$ shows how word $$i$$ attends to $$j$$. Sum of each row = 1 (softmax property).
 It’s the guest list with scores. Who’s the VIP (high weights) and who’s just background noise?
-### Visualization: Heatmaps à la Paper (Figure 3-5 Style)
+## Visualization: 
+### Heatmaps(Figure 3 to 5 Style)
 ```
 fig, ax = plt.subplots(figsize=(8, 6))
 im = ax.imshow(attention_weights, cmap='viridis', interpolation='nearest')
@@ -94,11 +95,56 @@ plt.colorbar(im, ax=ax, label='Attention Score')
 plt.tight_layout()
 plt.show()
 ```
-Math: We simulate two heads by perturbing $$Q, K, V$$ slightly (paper uses linear projections and h=8 heads). Each head’s $${attention_weights}$$ varies, showing diverse focus.
+Math: We simulate two heads by perturbing $$Q, K, V$$ slightly (paper uses linear projections and h=8 heads). Each head’s "attention_weights" varies, showing diverse focus.
 It’s a detective duo! One head might track "is" to "all," another "you" to "need" . Like Figure 4’s "its" resolution or Figure 5’s syntax mapping.
 Paper Link: Echoes multi-head visuals (Figure 2 right, Figure 5), where heads specialize (e.g., delimiter vs. binding).
 
-### Running the Show: Your Late-Night Experiment
+### Bar Chart of Self-Attention
+```
+fig2, ax2 = plt.subplots(figsize=(10, 5))
+self_attention = np.diag(attention_weights)
+ax2.bar(sentence, self_attention, color=['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD'], edgecolor='black')
+ax2.set_title("Self-Attention Strength per Word")
+ax2.set_ylabel("Attention Weight")
+ax2.set_ylim(0, 1)
+for i, v in enumerate(self_attention):
+    ax2.text(i, v + 0.02, f'{v:.3f}', ha='center', va='bottom')
+plt.tight_layout()
+```
+### Line Plot of Positional Encoding
+```
+fig3, ax3 = plt.subplots(figsize=(10, 5))
+pe_first_dim = pe[:, 0]
+ax3.plot(np.arange(n), pe_first_dim, marker='o', color='#FF6B6B', linewidth=2, label='Sine Wave (Dim 0)')
+ax3.set_title("Positional Encoding Trend (First Dimension)")
+ax3.set_xlabel("Position")
+ax3.set_ylabel("Encoding Value")
+ax3.grid(True, linestyle='--', alpha=0.7)
+ax3.legend()
+plt.tight_layout()
+```
+### Multi-Head Simulation Like Figure 5
+```
+fig4, axes4 = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+for idx, ax in enumerate(axes4):
+    q_head = q + np.random.randn(*q.shape) * 0.1
+    k_head = k + np.random.randn(*k.shape) * 0.1
+    v_head = v + np.random.randn(*v.shape) * 0.1
+    _, head_weights = scaled_dot_product_attention(q_head, k_head, v_head)
+    im = ax.imshow(head_weights, cmap='viridis', interpolation='nearest')
+    ax.set_xticks(np.arange(n))
+    ax.set_yticks(np.arange(n))
+    ax.set_xticklabels(sentence, rotation=45, ha='right')
+    ax.set_yticklabels(sentence) if idx == 0 else ax.set_yticklabels([])
+    for i in range(n):
+        for j in range(n):
+            text = ax.text(j, i, f'{head_weights[i, j]:.3f}', ha='center', va='center', color='w' if head_weights[i, j] > 0.5 else 'black')
+    ax.set_title(f"Head {idx + 1}: Attention Patterns")
+fig4.colorbar(im, ax=axes4, label='Attention Score', orientation='horizontal', pad=0.2)
+plt.tight_layout()
+```
+
+### Running the Show: Your Late Night Experiment
 
 Setup: 
 ```
