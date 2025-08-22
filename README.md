@@ -52,7 +52,7 @@ $${Attention}(Q, K, V) = {softmax}(\frac{QK^T}{\sqrt{d_k}})V$$
 
 $$QK^T$$ computes dot products (compatibility scores).
 Divide by $$\sqrt{d_k}$$ (here, $$\sqrt{8} \approx 2.83$$) stabilizes gradients (paper’s key insight).
-Softmax normalizes: $$text{softmax}(x_i) = \frac{e^{x_i - \max(x)}}{\sum e^{x_j - \max(x)}}$$ (numerically stable version).
+Softmax normalizes: $${softmax}(x_i) = \frac{e^{x_i - \max(x)}}{\sum e^{x_j - \max(x)}}$$ (numerically stable version).
 Output is a weighted sum of $$V$$.
 
 Picture a cocktail party where you (query) ask around (keys), score who’s worth listening to (dot products), and mix their stories (values) into a perfect drink. The scaling prevents a math hangover!
